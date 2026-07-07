@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Finance Overview - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#603b00",
+                        "outline-variant": "#c5c5d4",
+                        "inverse-on-surface": "#f2eff9",
+                        "on-secondary-container": "#00714d",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dbd9e2",
+                        "surface-variant": "#e3e1ea",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#bac3ff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fbf8ff",
+                        "surface-tint": "#4355b9",
+                        "on-primary-fixed": "#00105c",
+                        "error-container": "#ffdad6",
+                        "primary": "#24389c",
+                        "on-tertiary-fixed": "#2a1700",
+                        "error": "#ba1a1a",
+                        "outline": "#757684",
+                        "secondary-container": "#6cf8bb",
+                        "secondary": "#006c49",
+                        "secondary-fixed-dim": "#4edea3",
+                        "tertiary-container": "#805000",
+                        "surface-container-highest": "#e3e1ea",
+                        "on-tertiary-container": "#ffc988",
+                        "primary-fixed": "#dee0ff",
+                        "on-surface": "#1a1b22",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2f3037",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-background": "#1a1b22",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface-container": "#efedf6",
+                        "background": "#fbf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#cacfff",
+                        "on-secondary-fixed": "#002113",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-container-high": "#e9e7f0",
+                        "primary-fixed-dim": "#bac3ff",
+                        "on-surface-variant": "#454652",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f4f2fc",
+                        "primary-container": "#3f51b5",
+                        "on-primary-fixed-variant": "#293ca0",
+                        "surface": "#fbf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "container-margin": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+        }
+        .bento-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 1px 3px rgba(63, 81, 181, 0.05);
+            transition: all 0.2s ease;
+        }
+        .bento-card:hover {
+            box-shadow: 0 10px 15px rgba(63, 81, 181, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 20px;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="docked full-width top-0 sticky z-50 bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center w-full px-gutter h-16">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors active:scale-95 duration-100 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Finance</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors active:scale-95 duration-100 text-primary">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary-fixed-dim overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFUIRwBmO6t5-COLKEHt5yeU7qXgLknQl6-OGnHpBtCKRYTy8-LjUcD4Qq3clvfRfo_nAMEVsppAdDWGePSLxJsHpmdrkDOW2zc7Ts60CKjM3hpVnWHT4WNTVpzcFZxo9UHI-R_qGhodiqe4gqZZBAoE35I0EpxlCdDv00-SK-N7Ou0dcy3hL8P4xW2QPZkGo7EPnDQCaFqdzf4bIg5cd0wF6da5V3M1WdbyekKSVnECvB2d8e6bqxy7QQYDZeOOnOfo6qYpFAIVKT"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-7xl mx-auto px-4 md:px-lg py-md md:py-xl pb-32">
+<!-- Hero Section: Total Revenue -->
+<section class="mb-lg">
+<div class="relative overflow-hidden bento-card rounded-xl p-lg bg-primary-container text-on-primary-container flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<!-- Decorative Shader Background -->
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-50"></div>
+</div>
+<div class="relative z-10">
+<p class="font-label-caps text-label-caps uppercase tracking-widest text-primary-fixed mb-1">Lifetime Total Revenue</p>
+<h2 class="font-headline-lg text-headline-lg md:text-[48px] leading-tight mb-2">₹132,450</h2>
+<div class="flex items-center gap-2">
+<span class="flex items-center text-secondary-fixed text-body-sm font-semibold">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                            +12.5%
+                        </span>
+<span class="text-primary-fixed text-body-sm opacity-80">from last month</span>
+</div>
+</div>
+<div class="relative z-10 flex gap-4 w-full md:w-auto">
+<div class="flex-1 md:flex-none bento-card bg-white/10 backdrop-blur-md border-white/20 p-md rounded-lg">
+<p class="font-label-caps text-label-caps text-primary-fixed mb-1">Completed</p>
+<p class="font-headline-md text-headline-md text-white">49</p>
+</div>
+<div class="flex-1 md:flex-none bento-card bg-white/10 backdrop-blur-md border-white/20 p-md rounded-lg">
+<p class="font-label-caps text-label-caps text-primary-fixed mb-1">Cancelled</p>
+<p class="font-headline-md text-headline-md text-white">1</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Earnings by Client (Bento Cell) -->
+<div class="lg:col-span-7 flex flex-col gap-gutter">
+<div class="bento-card rounded-xl p-md md:p-lg h-full">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Earnings by Client</h3>
+<button class="text-primary hover:underline font-label-caps text-label-caps">VIEW ALL</button>
+</div>
+<div class="space-y-6">
+<!-- Client Item: Harman Germeny -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-lg text-body-lg font-medium">Harman Germeny</span>
+<span class="font-data-mono text-data-mono text-primary font-bold">₹42,500</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-3">
+<div class="bg-primary h-3 rounded-full transition-all duration-500" style="width: 32%"></div>
+</div>
+</div>
+<!-- Client Item: Raman Germeny -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-lg text-body-lg font-medium">Raman Germeny</span>
+<span class="font-data-mono text-data-mono text-primary font-bold">₹28,200</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-3">
+<div class="bg-primary h-3 rounded-full transition-all duration-500" style="width: 21%"></div>
+</div>
+</div>
+<!-- Client Item: Sumit -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-lg text-body-lg font-medium">Sumit</span>
+<span class="font-data-mono text-data-mono text-primary font-bold">₹24,000</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-3">
+<div class="bg-primary h-3 rounded-full transition-all duration-500" style="width: 18%"></div>
+</div>
+</div>
+<!-- Client Item: Mani germeny -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-lg text-body-lg font-medium">Mani germeny</span>
+<span class="font-data-mono text-data-mono text-primary font-bold">₹16,700</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-3">
+<div class="bg-primary h-3 rounded-full transition-all duration-500" style="width: 12%"></div>
+</div>
+</div>
+<!-- Client Item: Baljot kaur -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="font-body-lg text-body-lg font-medium">Baljot kaur Germeny</span>
+<span class="font-data-mono text-data-mono text-primary font-bold">₹12,500</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-3">
+<div class="bg-primary h-3 rounded-full transition-all duration-500" style="width: 9%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Payments (Bento Cell) -->
+<div class="lg:col-span-5">
+<div class="bento-card rounded-xl p-md md:p-lg h-[500px] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Payments</h3>
+<span class="p-2 rounded-lg bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-base">history</span>
+</span>
+</div>
+<div class="overflow-y-auto custom-scrollbar flex-1 -mr-2 pr-2">
+<div class="space-y-4">
+<!-- Payment Row: Rephrase -->
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold truncate max-w-[120px] md:max-w-[180px]">Repharese Task</p>
+<p class="text-body-sm text-outline font-medium">Sep 02 • Harman Germeny</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono font-bold text-secondary">₹8,000</p>
+<p class="text-[10px] font-label-caps text-secondary px-2 py-0.5 bg-secondary-container rounded-full inline-block">DONE</p>
+</div>
+</div>
+<!-- Payment Row: Pack -->
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold truncate max-w-[120px] md:max-w-[180px]">Pack Module A1</p>
+<p class="text-body-sm text-outline font-medium">Aug 31 • Raman Germeny</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono font-bold text-secondary">₹5,500</p>
+<p class="text-[10px] font-label-caps text-secondary px-2 py-0.5 bg-secondary-container rounded-full inline-block">DONE</p>
+</div>
+</div>
+<!-- Payment Row: LCO CW3 -->
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold truncate max-w-[120px] md:max-w-[180px]">LCO CW3 Analysis</p>
+<p class="text-body-sm text-outline font-medium">Aug 30 • Sumit</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono font-bold text-secondary">₹4,200</p>
+<p class="text-[10px] font-label-caps text-secondary px-2 py-0.5 bg-secondary-container rounded-full inline-block">DONE</p>
+</div>
+</div>
+<!-- Previous entries... -->
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold truncate max-w-[120px] md:max-w-[180px]">Managing in Health care</p>
+<p class="text-body-sm text-outline font-medium">Aug 28 • Mani germeny</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-data-mono font-bold text-secondary">₹6,000</p>
+<p class="text-[10px] font-label-caps text-secondary px-2 py-0.5 bg-secondary-container rounded-full inline-block">DONE</p>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 mt-auto">
+<button class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-on-surface font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
+                            Download Statement
+                            <span class="material-symbols-outlined text-base">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Distribution Chart Card (Revenue Insights) -->
+<div class="lg:col-span-12">
+<div class="bento-card rounded-xl p-md md:p-lg flex flex-col md:flex-row items-center gap-8 bg-surface-container-lowest">
+<div class="w-full md:w-1/3 flex flex-col items-center text-center md:text-left md:items-start">
+<h3 class="font-headline-md text-headline-md mb-2">Revenue Insights</h3>
+<p class="text-body-sm text-outline mb-4">Your current average revenue per assignment is ₹2,703. Increasing this by 10% would project a monthly gain of ₹13,245.</p>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full font-label-caps text-label-caps">High Yield</span>
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full font-label-caps text-label-caps">Growth</span>
+</div>
+</div>
+<div class="w-full md:w-2/3 h-48 md:h-64 flex items-end justify-between gap-2 px-2 pb-2 overflow-hidden">
+<!-- Mock Chart Bars -->
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[30%] hover:h-[35%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[60%] hover:h-[65%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/30 rounded-t-lg h-[45%] hover:h-[50%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/60 rounded-t-lg h-[85%] hover:h-[90%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[55%] hover:h-[60%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/70 rounded-t-lg h-[75%] hover:h-[80%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/50 rounded-t-lg h-[50%] hover:h-[55%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/90 rounded-t-lg h-[100%] hover:h-[95%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[40%] hover:h-[45%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/60 rounded-t-lg h-[70%] hover:h-[75%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/30 rounded-t-lg h-[35%] hover:h-[40%] transition-all relative group cursor-help"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[25%] hover:h-[30%] transition-all relative group cursor-help"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface-container border-t border-outline-variant shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps mt-1">Assignments</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-caps text-label-caps mt-1">Finance</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBars = document.querySelectorAll('.bg-primary.h-3');
+            progressBars.forEach((bar, index) => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 100 * (index + 1));
+            });
+
+            const buttons = document.querySelectorAll('button, a');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (window.navigator.vibrate) {
+                        window.navigator.vibrate(5);
+                    }
+                });
+            });
+        });
+    </script>
+</body></html>
